@@ -1,14 +1,11 @@
+# 여기에 적는 확장자를 가진 파일들은 git이 무시한다
+# Java .gitignore template
+
 # Compiled class file
 *.class
 
 # Log file
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
 
 # Package Files #
 *.jar
