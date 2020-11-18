@@ -3,10 +3,10 @@ public class A05_print {
 
 	public static void main(String[] args) {
 		
-		// # 콘솔에 출력하기 위한 여러가지 함수들
+		// # 콘솔에 출력하기 위한 여러가지 함수들  
 		
-		// 1. print() 
-		//	- 줄을 자동으로 바꾸지 않으며 출력하는 함수
+		// 1. print()
+		//	- 줄을 자동으로 바꾸지 않으며 출력하는 함수 
 		System.out.print("Hello, world!");
 		System.out.print("Hello, world!");
 		System.out.print("Hello, world!");
@@ -20,10 +20,10 @@ public class A05_print {
 		System.out.println("Hello, world!");
 		System.out.println("Hello, world!");
 		
-		// 3. printf()
+		// 3. printf()   
 		//	- 서식 문자를 이용해 출력할 수 있는 함수
 		//	- 서식을 이용하는게 편리한 경우가 많다
-		//	- 줄을 자동으로 바꿔주지 않는다
+		//	- 줄을 자동으로 바꿔주지 않는다     
 
 		// ex: 2020년 10월 20일을 출력
 		int year = 2020;
