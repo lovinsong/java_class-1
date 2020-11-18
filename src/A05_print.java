@@ -27,7 +27,7 @@ public class A05_print {
 
 		// ex: 2020년 10월 20일을 출력
 		int year = 2020;
-		int month = 10;
+		int month = 11;
 		int day = 20;
 		
 		// System.out.println(year + "년 " + month + "월 " + day + "일");
