@@ -44,12 +44,40 @@
       master로 checkout한 후에 BranchA를 merge한다
 
 # fast-forward 
- - 앞으로 감기
- - 바람직한 merge
+	    ㅁ - ㅁ - ㅁ  BranchA
+	  /
+ ㅁ - ㅁ - ㅁ   main(master)
+	  \
+	    ㅁ - ㅁ BranchB  
+
+# main의 역사
+ ㅁ - ㅁ - ㅁ
+
+# BranchA의 역사
+	    ㅁ - ㅁ - ㅁ
+	  /
+ ㅁ - ㅁ - ㅁ
+
+ - main에 최신 BranchA를 합치기 위해서는 앞으로 빨리감기만 하면 된다
+ - 이러한 상태를 fast-forward라고 한다 
 
 
+# 두 번째 merge
+	  
+ ㅁ - ㅁ - ㅁ -  ㅁ  - ㅁ BranchA, BranchB, main(master)   
+	  \           /
+	    ㅁ - ㅁ 
 
 
+# Rebase
 
+ ㅁ - ㅁ - ㅁ - ㅁ - ㅁ main(master)
+                 \ 			
+  	   ㅁ - ㅁ BranchA
 
+	=> ㅁ - ㅁ - ㅁ - ㅁ - ㅁ main(master)
+                		    \ 			
+	  		     ㅁ - ㅁ BranchA
+
+# Github/rnjsgurwns
 
