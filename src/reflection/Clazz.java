@@ -1,7 +1,10 @@
 package reflection;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 import myobj.fruit.NoMoreCalorieException;
 
@@ -59,7 +62,46 @@ public class Clazz {
 				Class.forName("java.lang.String")
 		).newInstance("red");
 		
-		((myobj.fruit.Apple)apple02).eat().eat().eat();
+		((myobj.fruit.Apple)apple02).eat().eat().eat();		
+		
+		Object apple03 = c.getConstructor(
+				Class.forName("java.lang.Integer"),
+				Class.forName("java.lang.String")
+		).newInstance(900, "green");
+		
+		((myobj.fruit.Apple)apple03).eat().eat().eat();
+		
+		
+		// 이 클래스에 어떤 필드값(변수)들이 있는지 알아내는 방법
+		for (Field f : c.getFields()) {
+			System.out.println("Accessible : " + f);
+		}		
+		
+		for (Field f : c.getDeclaredFields()) {
+			System.out.println("Declared : " + f);
+		}
+		
+		try {			
+			Field calorie = c.getDeclaredField("calorie");
+			Field color = c.getDeclaredField("color");
+			
+			// Field 클래스로 알아낼 수 있는 정보들 
+			System.out.println(calorie.getType());
+			
+			System.out.println("--- color field ---");
+			System.out.println("타입 : " + color.getType().getSimpleName());
+			System.out.println("접근제어자 : " + Modifier.toString(color.getModifiers()));
+			System.out.println("변수명 : " + color.getName());
+			
+		} catch (NoSuchFieldException e) {		
+			System.out.println("그런 필드 없음 익셉션");
+		} catch (SecurityException e) {
+			System.out.println("안보임(Novisible) 익셉션");
+		}
+		
+		for (Method m : c.getMethods()) {			
+			System.out.println("Accessible Method : " + m);			
+		}
 	}	
 	
 	private static void printParameters(Class[] parameters) {

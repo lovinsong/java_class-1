@@ -3,7 +3,7 @@ package myobj.fruit;
 // ※ 클래스 하나당 파일 하나가 바람직하다 
 public class Apple {
 	int calorie;
-	String color;
+	public String color;
 	
 	public Apple() {
 		
@@ -17,7 +17,7 @@ public class Apple {
 		}
 	}
 	
-	public Apple(int calorie, String color) {
+	public Apple(Integer calorie, String color) {
 		this.calorie = calorie;
 		this.color = color;
 	}
