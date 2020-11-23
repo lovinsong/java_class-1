@@ -54,6 +54,3 @@ SAVEPOINT save03;
 ROLLBACK;
 ROLLBACK TO save01; -- 먼저 생성된 SAVEPOINT로만 돌아갈 수 있다
 
-DESC employees;
-SELECT * FROM user_constraints WHERE table_name = 'EMPLOYEES';
-
