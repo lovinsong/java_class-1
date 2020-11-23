@@ -5,12 +5,21 @@ public class Apple {
 	int calorie;
 	String color;
 	
+	public Apple() {
+		
+	}
+	
 	public Apple(String color) {
 		calorie = 300;
 		
 		if (!color.equals("red")) {
 			throw new InvalidColorException();
 		}
+	}
+	
+	public Apple(int calorie, String color) {
+		this.calorie = calorie;
+		this.color = color;
 	}
 	
 	public Apple eat() throws NoMoreCalorieException {		
