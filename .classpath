@@ -8,5 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/KGITBANK/Desktop/sqldeveloper/jdbc/lib/ojdbc8.jar"/>
 	<classpathentry kind="lib" path="D:/자바SW개발자 양성과정 10월 권혁준/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KGITBANK/Downloads/HikariCP-3.4.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KGITBANK/Downloads/slf4j-api-1.7.30.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

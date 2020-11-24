@@ -61,7 +61,7 @@ public class ConnectSteps {
 					('길동', '홍', 1234, 10),
 					('길동', '홍', 1234, 10), 
 		 	   ] -> rs.next()의 결과가 없을 때 false가 반환되며 while이 종료된다.
-			*/
+			*/						
 			
 			while (rs.next()) {
 				System.out.printf("%-15s\t%-10s\t%-10d\t%-10d\n",
