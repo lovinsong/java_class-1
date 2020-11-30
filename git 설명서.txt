@@ -81,3 +81,21 @@
 
 # Github/rnjsgurwns
 
+
+# Push
+ 
+ 로컬 repository에서 추가한 최신 커밋을 원격 repository (Github, Git??)에
+ 업데이트 한다 (민다)
+
+
+# Pull
+
+ Github의 최신 상태를 로컬 repository로 업데이트 한다 (당겨온다)
+
+
+
+
+
+
+
+
