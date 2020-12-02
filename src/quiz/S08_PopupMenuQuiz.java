@@ -1,132 +1,81 @@
 package quiz;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
-import java.awt.Image;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.Collections;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
-import swing.SwingTools;
-import swing.btn.actions.ShowRandomCardBtnAction;
+import swing.comp.Dice;
+import swing.mouse.evt.RightClickShowPopup;
 
 public class S08_PopupMenuQuiz extends JFrame {
-	final static String[] paths = {
-			"assets/image/1.jpg",
-			"assets/image/2.jpg",
-			"assets/image/3.jpg",
-			"assets/image/4.jpg",
-			"assets/image/5.jpg",
-			"assets/image/6.jpg",
-	};  
-	final static Map<String,ImageIcon> images = new TreeMap<>();
 	
-	static {
-	     for (String path : paths) {
-	             setImageIcon(path);
-	     }
-	}
+	JMenuBar bar = new JMenuBar();
+	JMenu menu = new JMenu("주사위");
+	JPopupMenu popup = new JPopupMenu();
+	JMenuItem popup_item_reroll = new JMenuItem("reroll");
 	
-	private static void setImageIcon(String path) {
+	public S08_PopupMenuQuiz() {					
+		JPanel dice_panel = new JPanel(new GridLayout(1, 5, 5, 5));
+		ArrayList<Dice> dices = new ArrayList<>(5);
 		
-		int first = path.lastIndexOf("/");
-		int last = path.indexOf(".");
-		String name = path.substring(first+1,last);
-	        try {
-	                images.put(name,new ImageIcon(
-	                                ImageIO
-	                                        .read(new File(path))
-	                                        .getScaledInstance(70, 70, Image.SCALE_FAST)
-	                                ));
-	        } catch (IOException e) {
-	                e.printStackTrace();
-	        }
-	}
-	
-	
-	public S08_PopupMenuQuiz() {
+		for (int i = 0; i < 5; ++i) {
+			dices.add(new Dice());
+			dice_panel.add(dices.get(i));
+		}
+		dice_panel.addMouseListener(new RightClickShowPopup(popup, dice_panel));
+		dice_panel.setBackground(Color.black);
 		
-		JMenuBar bar = new JMenuBar();
-		JMenu menu = new JMenu("Menu");
-		JMenuItem i1 =  new JMenuItem("Suffle");
-		JPopupMenu popup = new JPopupMenu("DICE_MENU");
-		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING,0,0));
-		JMenuItem suffle = new JMenuItem("Suffle");
-		
-		JPanel[] dice_zones = {new JPanel(new CardLayout(6,6)), new JPanel(new CardLayout(6,6)), new JPanel(new CardLayout(6,6)), new JPanel(new CardLayout(6,6)), new JPanel(new CardLayout(6,6))};
-		
-		JPanel dice_zone1 = new JPanel(new CardLayout(6,6));
-		JPanel dice_zone2 = new JPanel(new CardLayout(6,6));
-		JPanel dice_zone3 = new JPanel(new CardLayout(6,6));
-		JPanel dice_zone4 = new JPanel(new CardLayout(6,6));
-		JPanel dice_zone5 = new JPanel(new CardLayout(6,6));
-		
-		SwingTools.initTestFrame(this);
-		
-		
-		this.add(panel);
-		panel.add(dice_zones[0]);
-		panel.add(dice_zones[1]);
-		panel.add(dice_zones[2]);
-		panel.add(dice_zones[3]);
-		panel.add(dice_zones[4]);
-		popup.add(suffle);
-		menu.add(i1);
-		
-		bar.add(menu);
-		
-		this.setLayout(new BorderLayout(0,0));
-		this.add(panel, BorderLayout.CENTER);
-		
-		i1.addActionListener(new ShowRandomCardBtnAction(dice_zones));
-	
-		
-		suffle.addActionListener(new ShowRandomCardBtnAction(dice_zones));
-
-		
-		
-		this.addMouseListener(new MouseAdapter() {
+		JButton reroll_btn = new JButton("다시 굴리기");		
+		reroll_btn.addActionListener(new ActionListener() {			
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				// e.getButton() : 어느 마우스 버튼이 눌렸는지 번호로 알려준다
-				// System.out.println("MBTN NUMBER: " + e.getButton());
-				
-				if (e.getButton() == MouseEvent.BUTTON3) {
-					int x = e.getX();
-					int y = e.getY();
-					popup.show(panel,x,y);
+			public void actionPerformed(ActionEvent e) {
+				for (Dice dice : dices) {
+					dice.roll();
 				}
+				System.out.println(dices);
+				for (int i = 0; i < 5; ++i) {
+					System.out.println("주사위" + i + ": " + dices.get(i).num);
+				}
+				System.out.println(Collections.frequency(dices, dices.get(0)));
 			}
 		});
 		
-		this.setJMenuBar(bar);
+		setJMenuBar(bar);
+		bar.add(menu);
 		
-		for (String name : images.keySet()) {
-			dice_zones[0].add(name,new JLabel(images.get(name)));
-			dice_zones[1].add(name,new JLabel(images.get(name)));
-			dice_zones[2].add(name,new JLabel(images.get(name)));
-			dice_zones[3].add(name,new JLabel(images.get(name)));
-			dice_zones[4].add(name,new JLabel(images.get(name)));
-		}
+		popup.add(popup_item_reroll);
+		menu.add(popup_item_reroll);
 		
-		
+		add(dice_panel, BorderLayout.CENTER);
+		add(reroll_btn, BorderLayout.SOUTH);
+				
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocation(3000, 100);
+		setSize(500, 200);
+		setVisible(true);
 	}
 	
 	public static void main(String[] args) {
 		new S08_PopupMenuQuiz();
 	}
+
 }
+
+
+
+
